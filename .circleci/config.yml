@@ -3,11 +3,6 @@ jobs:
   build_deploy:
   steps:
     - checkout
-    - save_cache:
-        name: Saving repo cache
-        key: repo-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
-        paths:
-          - .
     - run:
         name: npm dependency install
         command: |
