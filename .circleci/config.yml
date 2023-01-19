@@ -1,1 +1,22 @@
 
+jobs:
+  build_deploy:
+  steps:
+    - checkout
+    - save_cache:
+        name: Saving repo cache
+        key: repo-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
+        paths:
+          - .
+    - run:
+        name: npm dependency install
+        command: |
+          npm set unsafe-perm true
+          npm install
+    - run: aws s3 sync ./app/build/ s3://Roman_Romanov
+
+workflows:
+  version: 2
+  execute_bulk:
+    jobs:
+      - build_deploy
