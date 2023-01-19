@@ -8,7 +8,6 @@ env:
 phases:
   install:
     runtime-versions:
-      nodejs: 19.4.0
     commands:
       - echo Installing source NPM dependencies...
       - npm install
